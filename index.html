@@ -308,6 +308,17 @@ section{scroll-margin-top:84px;}
 .flagship-media img{width:100%; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); display:block;}
 .flagship-media p{font-size:0.78rem; color:var(--text-muted); font-style:italic; margin-top:0.6rem;}
 .flagship-actions{display:flex; flex-wrap:wrap; gap:0.9rem; margin-top:1.8rem;}
+.flagship-layout.media-wide{grid-template-columns:0.85fr 1.15fr; gap:2.5rem;}
+@media (max-width:900px){.flagship-layout.media-wide{grid-template-columns:1fr;}}
+.flagship-media video{width:100%; height:auto; aspect-ratio:4/3; border-radius:var(--radius); box-shadow:var(--shadow); border:1px solid var(--border); display:block; background:#0b1220;}
+.media-link{display:block; border-radius:var(--radius); transition:transform .15s ease;}
+.media-link:hover{transform:translateY(-2px);}
+
+/* ---------- En curso ---------- */
+@keyframes wip-pulse{0%,100%{opacity:1;} 50%{opacity:0.3;}}
+.wip-dot{width:8px; height:8px; border-radius:50%; background:var(--status-warning); display:inline-block; animation:wip-pulse 1.8s ease-in-out infinite;}
+.badge-wip{background:color-mix(in srgb, var(--status-warning) 16%, transparent); color:color-mix(in srgb, var(--status-warning) 70%, var(--text-primary));}
+.badge-wip .badge-dot{background:var(--status-warning); animation:wip-pulse 1.8s ease-in-out infinite;}
 
 .card h3{font-size:1.18rem; margin-top:0.9rem;}
 .card-desc{margin-top:0.6rem; color:var(--text-secondary); font-size:0.93rem; flex-grow:0;}
@@ -541,6 +552,45 @@ footer p{color:var(--text-muted); font-size:0.82rem;}
     </div>
   </section>
 
+  <section class="section flagship" id="proyecto-maritimo">
+    <div class="container flagship-layout media-wide">
+      <div class="reveal">
+        <span class="eyebrow"><span class="wip-dot"></span>Proyecto insignia · En curso</span>
+        <h2 style="margin-top:0.6rem;">La flota en la sombra: petroleros sancionados, rastreados con datos AIS abiertos</h2>
+        <p class="hero-desc" style="margin-top:1rem;">
+          Investigación abierta sobre cómo cruzan los estrechos daneses los petroleros que
+          transportan crudo ruso. Cruzo las posiciones AIS públicas de Dinamarca (la señal con la que
+          cada barco emite dónde está) con las listas de sanciones de EE. UU., Reino Unido y la UE, y
+          busco conducta evasiva con cinco detectores sobre <strong>DuckDB</strong>.
+          <strong>Isolation Forest</strong> y <strong>LightGBM</strong> intentan anticipar qué buques
+          serán sancionados después, validados fuera de muestra y sin fugas del futuro. Todo, en una
+          web con mapa animado (<strong>deck.gl</strong>), ficha por buque y modo en vivo.
+        </p>
+        <div class="flagship-stats">
+          <div class="stat-tile"><div class="stat-num">21.146</div><div class="stat-label">buques distintos escuchados en un solo mes (junio de 2024)</div></div>
+          <div class="stat-tile"><div class="stat-num">5</div><div class="stat-label">detectores de conducta evasiva, basados en reglas e inspeccionables</div></div>
+          <div class="stat-tile"><div class="stat-num">164</div><div class="stat-label">buques del mes en listas de sanciones; 147, sancionados después</div></div>
+          <div class="stat-tile"><div class="stat-num">7,2x</div><div class="stat-label">sobre el azar con una regla simple (petrolero + bandera de conveniencia): la marca a batir</div></div>
+        </div>
+        <div class="flagship-actions">
+          <a class="btn btn-primary" href="https://checkgraph.dev/es/" target="_blank" rel="noopener">Abrir la web ↗</a>
+          <a class="btn btn-ghost" href="https://github.com/PabloMarpar/maritime-fraud-signals" target="_blank" rel="noopener">Ver código en GitHub ↗</a>
+        </div>
+        <p style="font-size:0.78rem; color:var(--text-muted); margin-top:0.6rem;">
+          En curso: los modelos aún no baten con claridad esa regla simple. Estoy procesando 11 meses de archivo AIS (abril de 2024 a febrero de 2025) para validarlos en meses que no han visto.
+        </p>
+      </div>
+      <div class="flagship-media reveal">
+        <a class="media-link" href="https://checkgraph.dev/es/explore/" target="_blank" rel="noopener" aria-label="Abrir el explorador del mapa en checkgraph.dev">
+          <video id="mfsPreview" autoplay muted loop playsinline preload="auto" poster="assets/checkgraph/poster.jpg" width="1000" height="750">
+            <source src="assets/checkgraph/preview.mp4" type="video/mp4">
+          </video>
+        </a>
+        <p>Captura real de checkgraph.dev: junio de 2024 en los estrechos daneses, a 12 horas por segundo. En azul, petroleros; en naranja, buques en una lista de sanciones.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="section flagship" id="proyecto-insignia">
     <div class="container flagship-layout">
       <div class="reveal">
@@ -621,6 +671,25 @@ footer p{color:var(--text-muted); font-size:0.82rem;}
       </div>
 
       <div class="project-grid">
+        <article class="card reveal">
+          <span class="badge badge-wip"><span class="badge-dot"></span>En curso</span>
+          <h3>La flota en la sombra en datos AIS abiertos</h3>
+          <p class="card-desc">Detección de comportamiento evasivo de petroleros en los estrechos daneses con las posiciones AIS públicas de la Autoridad Marítima de Dinamarca, validada contra las listas de sanciones de EE. UU., Reino Unido y la UE. Cinco detectores basados en reglas sobre <strong>DuckDB</strong>, <strong>Isolation Forest</strong> y <strong>LightGBM</strong> evaluados fuera de muestra frente a una regla simple que ya acierta 7,2x más que el azar, y una web con mapa animado, fichas de buques y AIS en vivo.</p>
+
+          <div class="chart-wrap">
+            <a href="https://checkgraph.dev/es/explore/" target="_blank" rel="noopener"><img src="assets/checkgraph/poster.jpg" alt="Explorador de checkgraph.dev: trayectorias de petroleros y buques sancionados en los estrechos daneses, junio de 2024" loading="lazy" width="1000" height="750" style="width:100%; height:auto; border-radius:10px; border:1px solid var(--border); display:block;"></a>
+            <p class="chart-caption">Captura real de la web: en naranja, buques en una lista de sanciones.</p>
+          </div>
+
+          <div class="chip-row">
+            <span class="chip">DuckDB</span><span class="chip">AIS</span><span class="chip">Isolation Forest</span><span class="chip">LightGBM</span><span class="chip">deck.gl</span><span class="chip">Astro + Svelte</span>
+          </div>
+          <div class="card-footer" style="display:flex; gap:1.2rem; flex-wrap:wrap;">
+            <a class="card-link" href="https://checkgraph.dev/es/" target="_blank" rel="noopener">Abrir la web ↗</a>
+            <a class="card-link" href="https://github.com/PabloMarpar/maritime-fraud-signals" target="_blank" rel="noopener">Ver en GitHub ↗</a>
+          </div>
+        </article>
+
         <article class="card card-featured reveal">
           <span class="badge badge-featured"><span class="badge-dot"></span>Destacado</span>
           <h3>Demanda eléctrica y % renovable en España -- 7 días vista</h3>
@@ -966,6 +1035,22 @@ footer p{color:var(--text-muted); font-size:0.82rem;}
       });
     }, {threshold:0.4});
     gaugeObs.observe(gaugeArc);
+  }
+
+  var preview = document.getElementById('mfsPreview');
+  if(preview){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+      preview.removeAttribute('autoplay');
+      preview.pause();
+    } else if('IntersectionObserver' in window){
+      var previewObs = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if(e.isIntersecting){ var p = preview.play(); if(p && p.catch) p.catch(function(){}); }
+          else { preview.pause(); }
+        });
+      }, {threshold:0.1});
+      previewObs.observe(preview);
+    }
   }
 
   var months = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
